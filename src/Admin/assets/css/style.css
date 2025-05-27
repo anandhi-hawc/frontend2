@@ -1,0 +1,188 @@
+ @import '../../main.css';
+.sidebar-menu__link
+{
+        text-decoration: none;
+}
+.banner_dahboard
+{
+    width: 95%;
+}
+.nav_tab_container  
+{
+    margin-bottom: 2%;
+}
+ .dashboard_card_img
+ {
+    width: 100%;
+    height: -webkit-fill-available;
+    border-radius: 6px;
+ }
+.sidebar__logo img 
+{
+    width: 36%;
+}
+.bg-brand, .bg-brand:hover
+{
+    background-color: #496ba7;
+}
+.bg-gray
+{
+    background-color: #496ba7;
+    padding: 12px;
+}
+.progress_bar_level 
+{
+    width: 32%
+}
+.admin_event_card .gray-text {
+    color: #ccc;
+  }
+  
+  .admin_event_card .highlight-text {
+    color: #ff007f;
+  }
+  
+  .admin_event_card  {
+    /* display: grid; */
+    margin-bottom: 7%;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  
+  .admin_event_card .card {
+    background-color: #111;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 7px;
+    text-align: center;
+    border: 1px solid #222;
+    transition: transform 0.3s ease;
+  }
+  
+  .admin_event_card .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 20px rgba(255, 0, 127, 0.3);
+  }
+  
+  .admin_event_card .card img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    height: 182px;
+  }
+  
+  .admin_event_card .card h2 {
+    font-size: 1rem;
+    margin-bottom: 0px;
+    color: #fff;
+    text-align: left;
+    line-height: 26px;
+  }
+  .admin_event_card p
+  {
+    color: #fff;
+    text-align: left;
+    font-size: 13px;
+    line-height: 20px;
+    margin-bottom: 12px;
+  }
+  .admin_event_card .tags {
+    font-size: 0.9rem;
+    color: #aaa;
+    margin-bottom: 0px;
+    text-align: left;  
+}
+  .admin_event_card .tags .small_span
+  {
+    margin: 1px 6px;
+  }
+  .admin_event_card  .small_span .icon 
+  {
+    vertical-align: text-top;
+    margin: 0px 3px;
+  }
+  .admin_event_card .date {
+    font-size: 0.85rem;
+    color: #ccc;
+    margin-bottom: 15px;
+  }
+  
+  .admin_event_card .day {
+    font-weight: bold;
+    font-size: 1rem;
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .admin_event_card button {
+    background-color: #ff007f;
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+ 
+  .event-container {
+    background-color: #111827; /* Tailwind gray-900 */
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.5rem;
+    max-width: 400px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .date-box {
+    background-color: #1f2937; /* Tailwind gray-800 */
+    border-radius: 0.5rem;
+    padding: 0.375rem 0.75rem;
+    min-width: 56px;
+    text-align: center;
+    color: #d1d5db; /* Tailwind gray-300 */
+    font-weight: 600;
+    font-size: 0.75rem;
+    user-select: none;
+  }
+  .date-box .day {
+    color: white;
+    font-weight: 800;
+    font-size: 1.5rem;
+    line-height: 1;
+    user-select: none;
+  }
+  .event-info {
+    flex-grow: 1;
+    color: white;
+    user-select: none;
+  }
+  .event-info .date-text {
+    font-weight: 600;
+    font-size: 0.750rem;
+    margin-bottom: 0.125rem;
+  }
+  .event-info .time-text {
+    font-weight: 700;
+    font-size: 0.875rem;
+  }
+  .btn-register {
+    background-color: #6b7280; /* Tailwind gray-500 */
+    color: white;
+    font-weight: 600;
+    font-size: 0.875rem;
+    border-radius: 0.5rem;
+    padding: 0.375rem 1.5rem;
+    user-select: none;
+    border: none;
+    transition: background-color 0.2s ease-in-out;
+  }
+  .btn-register:hover,
+  .btn-register:focus {
+    background-color: #9ca3af; /* Tailwind gray-400 */
+    color: white;
+    outline: none;
+    box-shadow: none;
+  }
+ 
+ 

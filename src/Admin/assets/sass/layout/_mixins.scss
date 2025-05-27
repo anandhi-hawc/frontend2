@@ -1,0 +1,64 @@
+// src/Admin/assets/sass/helpers/_mixins.scss
+
+@mixin sm {
+    @media (max-width: 640px) {
+      @content;
+    }
+  }
+  
+  @mixin md {
+    @media (max-width: 768px) {
+      @content;
+    }
+  }
+  
+  @mixin lg {
+    @media (max-width: 1024px) {
+      @content;
+    }
+  }
+  
+  @mixin xl {
+    @media (max-width: 1280px) {
+      @content;
+    }
+  }
+  
+  @mixin lg-screen {
+    @media (max-width: 1024px) {
+      @content;
+    }
+  }
+  // Media query breakpoints
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+
+// Mixin for small screens and up
+@mixin sm-screen {
+  @media (max-width: #{$breakpoint-sm}) {
+    @content;
+  }
+}
+
+// Mixin for medium screens and up
+@mixin md-screen {
+  @media (max-width: #{$breakpoint-md}) {
+    @content;
+  }
+}
+
+// Mixin for large screens and up
+@mixin lg-screen {
+  @media (max-width: #{$breakpoint-lg}) {
+    @content;
+  }
+}
+
+// Mixin for extra large screens and up
+@mixin xl-screen {
+  @media (max-width: #{$breakpoint-xl}) {
+    @content;
+  }
+}
