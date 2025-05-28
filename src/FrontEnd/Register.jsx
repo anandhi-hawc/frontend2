@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import logo from '../FrontEnd/assets/img/logo.png';
-import { Link } from 'react-router-dom';
+import { Link ,useNavigate } from 'react-router-dom';
 import { RegisterApi } from '../services/Api';
+import front_style from "../FrontEnd/assets/css/front_style.module.css";
+import "../FrontEnd/assets/css/front_style.module.css";
 export default function Register() {
 const [isLoading, setIsLoading] = useState(false);
-
+const navigate = useNavigate();
   const [formData, setFormData] = useState({
     first_name: "",
     last_name: "",
@@ -55,12 +57,24 @@ const [isLoading, setIsLoading] = useState(false);
     else if (!regex.student_mobile.test(formData.student_mobile)) {
       newErrors.student_mobile = "Must 10 digit";
     }
-     if (formData.student_pwd==="") {
-      newErrors.student_pwd = "Password must be at least 10 characters";
-    }
-    else if(!regex.student_pwd.test(formData.student_pwd)){
-      newErrors.student_pwd = "Must 10 digit";
-    }
+    //  if (formData.student_pwd==="") {
+    //   newErrors.student_pwd = "Password must be at least 10 characters";
+    // }
+    // else if(!regex.student_pwd.test(formData.student_pwd)){
+    //   newErrors.student_pwd = "Must 10 digit";
+    // }
+    if (formData.student_pwd === "") {
+  newErrors.student_pwd = "Password must be at least 10 characters";
+} else if (!regex.student_pwd.test(formData.student_pwd)) {
+  newErrors.student_pwd = "Password must be at least 10 characters";
+}
+
+if (formData.student_pwd_confrim === "") {
+  newErrors.student_pwd_confrim = "Confirm your password";
+} else if (formData.student_pwd !== formData.student_pwd_confrim) {
+  newErrors.student_pwd_confrim = "Passwords do not match";
+}
+
    if (formData.student_idnumber==="") {
       newErrors.student_idnumber = "Id number required";
     }
@@ -88,9 +102,7 @@ const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // if (validate()) {
-      
-    // }
+   if(!validate()) return
     setIsLoading(true);
     try {
       let data = {
@@ -105,6 +117,7 @@ const [isLoading, setIsLoading] = useState(false);
       // Replace with your actual backend API URL
       const response = await RegisterApi(data);
       setMessage('Registered successfully!');
+       navigate('/admin/dashboard'); 
       console.log(response.data);
     } catch (error) {
       setMessage('Registration failed.');
@@ -115,7 +128,8 @@ const [isLoading, setIsLoading] = useState(false);
   };
 
   return (
-    <section className=" py-3 py-md-5 py-xl-8 ">
+     <div className={front_style.frontend_bg}> 
+    <section className=" py-3 py-md-5 py-xl-8 frontend_style">
 {isLoading && (
   <div className="position-fixed top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center bg-white bg-opacity-75" style={{ zIndex: 1050 }}>
     <div className="spinner-border text-primary" role="status" style={{ width: '3rem', height: '3rem' }}>
@@ -143,15 +157,15 @@ const [isLoading, setIsLoading] = useState(false);
           </div>
           <div className="col-12 col-md-6 col-xl-5">
             <div className="card border-0 rounded-4">
-              <div className="card-body  p-md-4 p-xl-5">
+              <div className="card-body  p-md-4 p-xl-3">
                 <div className="mb-4">
                   <h3>Sign up</h3>
                   <p>Already on HAWC?
                     <Link to="/login">Login</Link>
                   </p>
                 </div>
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div className="row gy-3 overflow-hidden mt-3">
+                <form onSubmit={handleSubmit} className="space-y-4 ">
+                  <div className="row gy-3 overflow-hidden mt-3 register_form">
                     <div className="col-6 mt-1">
                       <div className="form-floating mb-3">
                         <input type="text" className="form-control" name="first_name" placeholder="First Name"
@@ -261,9 +275,9 @@ const [isLoading, setIsLoading] = useState(false);
                         </div>
                       </div>
                       <div className="col-12 mt-0">
-                        <div className="custom-control custom-checkbox">
-                          <input type="checkbox" className="custom-control-input" id="customCheck" name="example1" />
-                          <label className="custom-control-label" htmlFor="customCheck"> By continuing, I agree to <a href="#!">
+                        <div className="custom-control custom-checkbox d-flex align-items-baseline">
+                          <input type="checkbox" defaultChecked className="custom-control-input" id="customCheck" name="example1" />
+                          <label className="custom-control-label ms-1" htmlFor="customCheck"> By continuing, I agree to <a href="#!">
                             Terms & Conditions</a> & <a href="#!">privacy policy</a>.</label>
                         </div>
                       </div>
@@ -297,6 +311,7 @@ const [isLoading, setIsLoading] = useState(false);
         </div>
       </div>
     </section>
+    </div>
 
   );
 };

@@ -23,7 +23,7 @@ export default function Navbar() {
         </Link>
         </li>
         <li className="nav-item">
-        <Link to="/lecturesignup" className="nav-link active">Lecturer Register         
+        <Link to="/lecturerregister" className="nav-link active">Lecturer Register         
         </Link>
         </li>
         <li className="nav-item">

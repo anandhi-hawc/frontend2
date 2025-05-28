@@ -1,9 +1,14 @@
-@import "./bootstrap.min.css";
+/* @import "./bootstrap.min.css"; */
+@import "../../../assets//bootstrap.min.css";
 
 
 body  .frontend_bg
 {
     background-color:  #5e5a95 ;
+        /* height: 100vh; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .frontend_style .appfront {
   /* background-color:  #5e5a95 !important; */
@@ -136,4 +141,8 @@ a {
 
 .frontend_style .input-group:has(input.is-invalid) .input-group-text {
   border-color: var(--bs-form-invalid-border-color);
+}
+ .register_form 
+{
+      font-size: 14px;
 }

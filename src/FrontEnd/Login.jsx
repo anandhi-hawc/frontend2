@@ -4,11 +4,12 @@ import { storeUsageData } from '../services/Storage';
 import { isAuthenticated } from '../services/Auth';
 import { Link,useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import styles  from"../FrontEnd/assets/css/front_style.module.css";
+import front_style from "../FrontEnd/assets/css/front_style.module.css";
 import { LoginApi } from '../services/Api';
 axios.defaults.baseURL = "http://lms.hawc.in/";
 axios.defaults.withCredentials = true;
 export default function Login() {
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
    const [form, setForm] = useState({
     email: "",
@@ -44,6 +45,7 @@ export default function Login() {
     const handleSubmit = async  (e) => {
       e.preventDefault();
       if(!validate()) return
+      setIsLoading(true);
         console.log("Submitted!", form);
          
           try {
@@ -53,7 +55,9 @@ export default function Login() {
     } catch (err) {
       console.error("Login failed:", err);
       alert("Invalid credentials or server error");
-    }
+    } finally {
+    setIsLoading(false); // 🔁 Hide loader
+  }
       
     }
 
@@ -66,7 +70,14 @@ export default function Login() {
 // }, []);
     
     return (
-       <div className={styles.frontend_bg}> 
+       <div className={front_style.frontend_bg} style={{ height: '100vh' }}> 
+       {isLoading && (
+  <div className="position-fixed top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center bg-white bg-opacity-75" style={{ zIndex: 1050 }}>
+    <div className="spinner-border text-primary" role="status" style={{ width: '3rem', height: '3rem' }}>
+      <span className="visually-hidden">Loading...</span>
+    </div>
+  </div>
+)}
       <section className=" py-3 py-md-5 py-xl-8">
     <div className="container">
       <div className="row gy-4 align-items-center">
@@ -93,7 +104,7 @@ export default function Login() {
                   <div className="mb-4">
                     <h3>Sign in</h3>
                     <p>Don't have an account? 
-                    <Link to="/signup">Sign Up</Link></p>
+                    <Link to="/studentregister">Sign Up</Link></p>
                   </div>
                 </div>
               </div>
@@ -120,11 +131,12 @@ export default function Login() {
                             
                   </div>
                   <div className="col-12 mt-0">
-                    <div className="form-check">
+                  <div className="custom-control custom-checkbox">
+                      
                       <input className="form-check-input" type="checkbox"  
                       defaultChecked  value="" name="remember_me" id="remember_me" 
                       />
-                      <label className="form-check-label text-secondary" htmlFor="remember_me">
+                      <label className="form-check-label custom-control-label text-secondary ms-1" htmlFor="remember_me">
                         Keep me logged in
                       </label>
                     </div>

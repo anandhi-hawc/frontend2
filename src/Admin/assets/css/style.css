@@ -1,4 +1,8 @@
  @import '../../main.css';
+ .sidebar-menu 
+ {
+      padding-left: 0;
+ }
 .sidebar-menu__link
 {
         text-decoration: none;

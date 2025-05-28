@@ -13,6 +13,7 @@ const API_BASE_URL = "http://lms.hawc.in"; // Replace with your real base URL
 
 
 const REGISTER_URL=`api/register/student`
+const LECTURER_REGISTER_URL=`api/register/lecturer`
 const LOGIN_URL=`api/login`
 const USER_DETAILS_URL=`api/login`
 const LOGOUT_URL=`api/logout`
@@ -44,6 +45,22 @@ try {
 // return   axios.post(REGISTER_URL,data);
 }
 
+export  const LecturerRegisterApi =async (formData)=>
+{
+    
+try {
+    const response = await axios.post(LECTURER_REGISTER_URL,formData);
+    
+  storeUsageData(response);
+                console.log(response);
+                alert("redirect dashboard")
+                // navigate('/admin');
+    return response.data;
+  } catch (error) {
+    throw error.response?.data || error;
+  }
+
+}
 export  const LoginApi =async (form)=>
 {
 try{
