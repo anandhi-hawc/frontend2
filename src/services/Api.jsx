@@ -17,6 +17,8 @@ const LECTURER_REGISTER_URL=`api/register/lecturer`
 const LOGIN_URL=`api/login`
 const USER_DETAILS_URL=`api/login`
 const LOGOUT_URL=`api/logout`
+const GET_COURSES = `api/student/courses`
+const SUBSCRIBE_COURSES = `api/student/mycourses`
 
 export  const RegisterApi =async (formData)=>
 {
@@ -98,3 +100,61 @@ export const logout = async () => {
 return axios.post(LOGOUT_URL,data )
 
 };
+
+
+
+export const GetCourses = () => {
+  const user = JSON.parse(localStorage.getItem("user"));
+  const token = user?.token;
+
+  if (!token) {
+    console.error("No token found.");
+    return Promise.reject("No token found."); // important: return a rejected promise if no token
+  }
+
+  return axios.get(GET_COURSES, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      Accept: 'application/json',
+    }
+  });
+  
+};
+
+
+
+export const SubscribeCourses = () => {
+  const user = JSON.parse(localStorage.getItem("user"));
+  const token = user?.token;
+  if (!token) {
+    console.error("No token found.");
+    return Promise.reject("No token found."); // important: return a rejected promise if no token
+  }
+  return axios.get(SUBSCRIBE_COURSES, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      Accept: 'application/json',
+    }
+  });
+  
+};
+// export const GetCourses = () => {
+//   // let data={token:getUserData()}
+//   // return axios.get(GET_COURSES, data)
+//    const user = JSON.parse(localStorage.getItem("user"));
+//     const token = user?.token;
+
+//     if (!token) {
+//       console.error("No token found.");
+//       return;
+//     }
+// return axios.get(GET_COURSES,{
+//       headers: {
+//         Authorization: `Bearer ${token}`,
+//         Accept: 'application/json'
+//       }
+//     } )
+  
+      
+      
+// }

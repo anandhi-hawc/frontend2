@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import {  logout} from '../../services/Api';
 
-function Header() {
+function Header({toggleSidebar}) {
   
   const handleLogout = () => {
     // Remove user data
@@ -13,7 +13,9 @@ function Header() {
   
       <div>
         <div class="top-navbar flex-between gap-16">
-
+ <button onClick={toggleSidebar} className="btn btn-outline-secondary mb-3 background_color_blue">
+          ☰
+        </button>
             <div class="flex-align gap-16">
               
                  <button type="button" class="toggle-btn d-xl-none d-flex text-26 text-gray-500"><i class="ph ph-list"></i></button>

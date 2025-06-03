@@ -5,8 +5,8 @@ function Course() {
 
 
     return (
-
-            <div class="container">
+<div class="dashboard-body">
+            <div class="">
                 <h1 className="title">
                     <span class="gray-text">Ongoing</span>
                     <span class="highlight-text">Workshop</span>
@@ -162,7 +162,7 @@ function Course() {
                     </div>
                 </div>
             </div>
-       
+       </div>
     )
 
 

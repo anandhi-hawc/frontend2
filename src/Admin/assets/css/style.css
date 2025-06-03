@@ -188,5 +188,33 @@
     outline: none;
     box-shadow: none;
   }
- 
- 
+
+
+
+  
+ .sidebar {
+  width: 252px;
+  transition: width 0.3s;
+  overflow-x: hidden;
+}
+.sidebar.collapsed {
+  width: 0px;
+}
+.sidebar.collapsed .menu-label {
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.sidebar.collapsed:hover .menu-label {
+  opacity: 1;
+}
+.dashboard-main-wrapper {
+  margin-inline-start: 252px;
+  transition: margin-inline-start 0.3s;
+}
+.dashboard-main-wrapper.full-width {
+  margin-inline-start: 0px;
+}
+.background_color_blue
+{
+  background-color: #496ba7;
+}

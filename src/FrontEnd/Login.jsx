@@ -50,6 +50,7 @@ export default function Login() {
          
           try {
   const response = await LoginApi(form);
+  console.log(response)
   navigate('/admin/dashboard'); 
   
     } catch (err) {

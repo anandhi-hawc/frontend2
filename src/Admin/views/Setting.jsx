@@ -22,6 +22,62 @@ function Setting() {
     return (
 
         <div className="dashboard-body">
+            <section className="py-5 bg-light">
+      <div className="container text-center">
+        <h2 className="mb-4">Subscription Plans</h2>
+        <p className="mb-5">Choose a plan that fits your learning goals</p>
+        
+        <div className="row">
+          {/* Basic Plan */}
+          {/* <div className="col-md-4 mb-4">
+            <div className="card h-100 shadow-sm">
+              <div className="card-body">
+                <h5 className="card-title">Basic</h5>
+                <h6 className="card-price text-primary">$9/month</h6>
+                <ul className="list-unstyled my-3">
+                  <li>✅ Access to free courses</li>
+                  <li>🚫 No certificate</li>
+                  <li>🚫 No mentor support</li>
+                </ul>
+                <button className="btn btn-outline-primary w-100">Choose Plan</button>
+              </div>
+            </div>
+          </div> */}
+
+          {/* Standard Plan */}
+          {/* <div className="col-md-4 mb-4">
+            <div className="card h-100 shadow-lg border-primary">
+              <div className="card-body">
+                <h5 className="card-title">Standard</h5>
+                <h6 className="card-price text-primary">$19/month</h6>
+                <ul className="list-unstyled my-3">
+                  <li>✅ Access to all courses</li>
+                  <li>✅ Certificate on completion</li>
+                  <li>🚫 No mentor support</li>
+                </ul>
+                <button className="btn btn-primary w-100">Choose Plan</button>
+              </div>
+            </div>
+          </div> */}
+
+          {/* Premium Plan */}
+          {/* <div className="col-md-4 mb-4">
+            <div className="card h-100 shadow-sm">
+              <div className="card-body">
+                <h5 className="card-title">Premium</h5>
+                <h6 className="card-price text-primary">$29/month</h6>
+                <ul className="list-unstyled my-3">
+                  <li>✅ All Standard features</li>
+                  <li>✅ 1-on-1 mentor support</li>
+                  <li>✅ Priority support</li>
+                </ul>
+                <button className="btn btn-outline-primary w-100">Choose Plan</button>
+              </div>
+            </div>
+          </div> */}
+        </div>
+      </div>
+    </section>
             <div className="breadcrumb mb-24">
                 <ul className="flex-align gap-4">
                     <li><a href="index.html" className="text-gray-200 fw-normal text-15 hover-text-main-600">Home</a></li>

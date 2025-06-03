@@ -1,7 +1,8 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useLocation, Route, Routes } from "react-router-dom";
 import SideBar from "../layouts/SideBar";
 import '../assets/css/bootstrap.min.css';
+import '../assets/js/boostrap.bundle.min.js';
 import '../assets/css/style.css';
 import '../assets/css/icons.css';
 
@@ -17,13 +18,16 @@ import PrivateRoute from '../../utils/PrivateRoute';
 // import DyteMeetingRoom from "../views/DyteMeetingRoom";
 
 function AdminLayout() {
+   const [collapsed, setCollapsed] = useState(false);
+
+  const toggleSidebar = () => setCollapsed(!collapsed);
+
   return (
   
  <div className="main-panel" >
- <SideBar/> 
-<div className="dashboard-main-wrapper">
-<Header/> 
-
+ <SideBar collapsed={collapsed} toggleSidebar={toggleSidebar} /> 
+<div  className={`dashboard-main-wrapper ${collapsed ? "full-width" : ""}`}>
+    <Header toggleSidebar={toggleSidebar} />
  <Routes>
             <Route path="dashboard"  element={<PrivateRoute><Dashboard /></PrivateRoute>} />
             <Route path="course" element={<PrivateRoute><Course /></PrivateRoute>} />
