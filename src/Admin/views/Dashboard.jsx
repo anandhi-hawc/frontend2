@@ -5,7 +5,7 @@ import Woman from '../assets/images/woman.png';
 import Boy from '../assets/images/boy.png';
 import Img1 from '../assets/images/img1.png';
 import Img2 from '../assets/images/img2.png';
-import axios from 'axios';
+// import axios from 'axios';
 import { getUserData } from '../../services/Storage';
 import { GetCourses, SubscribeCourses } from "../../services/Api";
 import GradientCard from '../components/GradientCard';
@@ -17,6 +17,19 @@ function Dashboard() {
     const [courses, setCourses] = useState([]);
     const [subscourses, setSubsCourses] = useState([]);
     const [loading, setLoading] = useState(true);
+const handleAddCourse = () => {
+  if (!courses) return;
+
+  // Prevent duplicates (optional)
+  if (!courses.some(course => course.course_id === setSubsCourses.course_id)) {
+    setCourses(prev => [...prev, setSubsCourses]);
+  }
+
+  // Optionally close modal, switch tabs, etc.
+};
+
+
+
     const formatDateTime = (dateString) => {
         const date = new Date(dateString);
 
@@ -50,7 +63,7 @@ function Dashboard() {
             try {
                 const coursesResponse = await GetCourses();
                 setCourses(coursesResponse.data.data.boardClassCourses);
-                // console.log(coursesResponse.data.data.boardClassCourses)
+                 console.log(coursesResponse.data.data.boardClassCourses)
                 const anotherResponse = await SubscribeCourses();
                 setSubsCourses(anotherResponse.data.data.student_courses);
                 console.log(anotherResponse.data)
@@ -108,7 +121,7 @@ function Dashboard() {
                                     <div class="col-lg-6">
                                         <div class="grettings-box-two__content">
                                             <h2 class="fw-medium mb-0 flex-align gap-10">Hi, {user?.name}
-                                                <img src={waveHand} alt="" /> </h2>                                            
+                                                <img src={waveHand} alt="" /> </h2>
                                             <h2 class="fw-medium mb-16">Effective, Engaging & Experienced Teaching</h2>
                                             <div class="event-container">
                                                 <div class="event-info">
@@ -173,7 +186,7 @@ function Dashboard() {
                                             {courses
                                                 .filter(course => course.subscribed === 1)
                                                 .map(course => (
-                                                    <div className="col-lg-4 col-sm-6"  key={course.course_id}>
+                                                    <div className="col-lg-4 col-sm-6" key={course.course_id}>
                                                         <div className="card border border-gray-100">
                                                             <div className="card-body p-8">
                                                                 <div style={{ display: 'flex', gap: '20px' }}>
@@ -227,7 +240,9 @@ function Dashboard() {
                                                                 <span className="text-13 fw-bold text-gray-600">4.9</span>
                                                                 <span className="text-13 fw-bold text-gray-600">(12k)</span>
                                                             </div> */}
-                                                                        <button type="button" className="btn btn-outline-main rounded-pill py-9" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                                        <button type="button" className="btn btn-outline-main rounded-pill py-9" data-bs-toggle="modal"
+                                                                            data-bs-target="#exampleModal"
+                                                                            value={course.course_id}   onClick={handleAddCourse}>
                                                                             Add Course
                                                                         </button>
                                                                         {/* Modal */}
@@ -235,11 +250,12 @@ function Dashboard() {
                                                                             <div className="modal-dialog">
                                                                                 <div className="modal-content">
                                                                                     <div className="modal-header">
-                                                                                        <h1 className="modal-title fs-5" id="exampleModalLabel">Modal Title</h1>
+                                                                                        <h2 className="mb-4 modal-title fs-5" id="exampleModalLabel">Subscription Plans</h2>
+                                                                                                   {/* <h2>{course.course_name}</h2> */}
                                                                                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                                     </div>
-                                                                                    <div className="modal-body">
-                                                                                    <PricingPage/>
+                                                                                    <div className="modal-body p-2">
+                                                                                        <PricingPage  value={course.course_id} CoursesNames={course}/>
                                                                                     </div>
                                                                                     <div className="modal-footer">
                                                                                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>

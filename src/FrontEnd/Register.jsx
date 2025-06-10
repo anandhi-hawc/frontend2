@@ -108,11 +108,11 @@ if (formData.student_pwd_confrim === "") {
       let data = {
         name: formData.first_name,
         email: formData.student_email,
-        mobile: formData.student_mobile,
+        // mobile: formData.student_mobile,
         password: formData.student_pwd,
         password_confirmation: formData.student_pwd_confrim,
-        id_number: formData.student_idnumber,
-        gender_id: formData.select_gender,
+        // id_number: formData.student_idnumber,
+        // gender_id: formData.select_gender,
       }
       // Replace with your actual backend API URL
       const response = await RegisterApi(data);

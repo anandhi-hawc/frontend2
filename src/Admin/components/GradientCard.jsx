@@ -11,7 +11,7 @@ const getRandomLightGradient = () => {
 const GradientCard  = ({children}) => {
  const gradientStyle = {
     background: getRandomLightGradient(),
-    width: 'auto',
+    width: '-webkit-fill-available',
     height: '200px',
     borderRadius: '16px',
     boxShadow: '0 4px 20px rgba(0,0,0,0.1)',

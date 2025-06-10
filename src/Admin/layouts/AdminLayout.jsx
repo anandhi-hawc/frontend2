@@ -15,7 +15,7 @@ import Setting from "../views/Setting";
 // import { isAuthenticated } from "../services/Auth";
 import PrivateRoute from '../../utils/PrivateRoute';
 // import DyteScreen from "../views/DyteScreen";
-// import DyteMeetingRoom from "../views/DyteMeetingRoom";
+import DyteMeetingRoom from "../views/DyteMeetingRoom";
 
 function AdminLayout() {
    const [collapsed, setCollapsed] = useState(false);
@@ -31,6 +31,7 @@ function AdminLayout() {
  <Routes>
             <Route path="dashboard"  element={<PrivateRoute><Dashboard /></PrivateRoute>} />
             <Route path="course" element={<PrivateRoute><Course /></PrivateRoute>} />
+             <Route path="meetingroom" element={<PrivateRoute><DyteMeetingRoom/></PrivateRoute>} /> 
           <Route path="setting" element={<PrivateRoute><Setting/></PrivateRoute>} /> 
             <Route path="*" element={<h1>404 Page Not Found</h1>} />
 

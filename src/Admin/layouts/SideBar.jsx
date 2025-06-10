@@ -86,17 +86,17 @@ function SideBar({ routes, collapsed }) {
                  */}
 
                             <li className="sidebar-menu__item">
-                                <Link to="/admin/dytescreen" className="sidebar-menu__link">
+                                <Link to="/admin/meetingroom" className="sidebar-menu__link">
                                     <span className="icon"><i class="ph ph-monitor"></i></span>
                                     <span className="text">Dyte Screen</span>
                                 </Link>
                             </li>
-                            <li className="sidebar-menu__item">
+                            {/* <li className="sidebar-menu__item">
                                 <Link to="/admin/dytemettingroom" className="sidebar-menu__link">
                                     <span className="icon"><i class="ph ph-monitor"></i></span>
                                     <span className="text">Dyte metting room</span>
                                 </Link>
-                            </li>
+                            </li> */}
                             <li className="sidebar-menu__item">
                                 <Link to="/admin/setting" className="sidebar-menu__link">
                                     <span className="icon"><i className="ph ph-gear"></i></span>
