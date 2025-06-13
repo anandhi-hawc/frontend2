@@ -19,6 +19,7 @@ const USER_DETAILS_URL=`api/login`
 const LOGOUT_URL=`api/logout`
 const GET_COURSES = `api/student/courses`
 const SUBSCRIBE_COURSES = `api/student/mycourses`
+const LIVE_MEETING_CLASS=`api/student/myclasses`
 
 export  const RegisterApi =async (formData)=>
 {
@@ -138,6 +139,40 @@ export const SubscribeCourses = () => {
   });
   
 };
+
+// get live class with meetingid 
+export const LiveMeetingClass = () => {
+ const user = JSON.parse(localStorage.getItem("user"));
+  const token = user?.token;
+  if (!token) {
+    console.error("No token found.");
+    return Promise.reject("No token found."); // important: return a rejected promise if no token
+  }
+  return axios.get(LIVE_MEETING_CLASS, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      Accept: 'application/json',
+    }
+    
+  });
+
+};
+
+// get dyte metting
+export const GetDyteMeeting = async () => {
+  try {
+    const response = await fetch('http://localhost:3000/api/meetings/:meetingId');
+    if (!response.ok) {
+      throw new Error('Failed to fetch meeting details');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching meeting details:', error);
+    throw error;
+  }
+};
+
+
 // export const GetCourses = () => {
 //   // let data={token:getUserData()}
 //   // return axios.get(GET_COURSES, data)

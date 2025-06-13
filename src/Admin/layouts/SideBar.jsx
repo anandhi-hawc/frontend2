@@ -86,17 +86,31 @@ function SideBar({ routes, collapsed }) {
                  */}
 
                             <li className="sidebar-menu__item">
-                                <Link to="/admin/meetingroom" className="sidebar-menu__link">
+                                <Link to="/class/:classId/:board/:subject" className="sidebar-menu__link">
                                     <span className="icon"><i class="ph ph-monitor"></i></span>
                                     <span className="text">Dyte Screen</span>
                                 </Link>
                             </li>
-                            {/* <li className="sidebar-menu__item">
-                                <Link to="/admin/dytemettingroom" className="sidebar-menu__link">
+                            <li className="sidebar-menu__item">
+                                <Link to="/admin/multipleuser" className="sidebar-menu__link">
                                     <span className="icon"><i class="ph ph-monitor"></i></span>
-                                    <span className="text">Dyte metting room</span>
+                                    <span className="text">multipleuser</span>
                                 </Link>
-                            </li> */}
+                            </li>
+
+                            <li className="sidebar-menu__item">
+                                <Link to="/admin/dytejoin" className="sidebar-menu__link">
+                                    <span className="icon"><i class="ph ph-monitor"></i></span>
+                                    <span className="text">dytejoin</span>
+                                </Link>
+                            </li>
+                            <li className="sidebar-menu__item">
+                                <Link to="/admin/livemeetingclass" className="sidebar-menu__link">
+                                    <span className="icon"><i class="ph ph-monitor"></i></span>
+                                    <span className="text">live meeting rooms</span>
+                                </Link>
+                            </li>
+
                             <li className="sidebar-menu__item">
                                 <Link to="/admin/setting" className="sidebar-menu__link">
                                     <span className="icon"><i className="ph ph-gear"></i></span>

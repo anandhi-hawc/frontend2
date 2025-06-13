@@ -22,7 +22,7 @@ return (
       <div style={{ height: '700px' }}>
       <DyteMeeting mode="fill" meeting={meeting} showSetupScreen={true} />
       </div>
-      {roomState === 'ended'? (<center>Custom post-meeting UI</center>): null}
+      {roomState === 'ended'? (<center>Custom post-meeting UI</center>): <div> no meeting </div>}
     </div>
   </div>
 

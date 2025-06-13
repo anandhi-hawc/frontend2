@@ -1,15 +1,29 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import waveHand from '../assets/images/wave-hand.png';
 import StarShape from '../assets/images/star-shape.png';
 import Woman from '../assets/images/woman.png';
 import Boy from '../assets/images/boy.png';
 import Img1 from '../assets/images/img1.png';
 import Img2 from '../assets/images/img2.png';
-// import axios from 'axios';
+import axios from 'axios';
 import { getUserData } from '../../services/Storage';
 import { GetCourses, SubscribeCourses } from "../../services/Api";
 import GradientCard from '../components/GradientCard';
 import PricingPage from "../components/PricingPage";
+import SubscribedCourses from "./SubscribedCourses";
+// import ClassMeeting from "../components/ClassMeeting";
+import ClassMeeting from "../components/ClassMeeting";
+import {
+  DyteMeeting,
+  DyteUiProvider
+} from '@dytesdk/react-ui-kit';
+import {
+  useDyteClient,
+  DyteProvider
+} from '@dytesdk/react-web-core';
+
+
 function Dashboard() {
     const user = getUserData();
 
@@ -17,16 +31,30 @@ function Dashboard() {
     const [courses, setCourses] = useState([]);
     const [subscourses, setSubsCourses] = useState([]);
     const [loading, setLoading] = useState(true);
-const handleAddCourse = () => {
-  if (!courses) return;
+      const [meetingData, setMeetingData] = useState(null);
+ const [token, setToken] = useState(null);
+     const [meeting, setMeeting] = useState(null);
+ const [dyteClient, initDyteClient] = useDyteClient();
+ const [activeCourseId, setActiveCourseId] = useState(null);
+//      const [showMeeting, setShowMeeting] = useState(false);
 
-  // Prevent duplicates (optional)
-  if (!courses.some(course => course.course_id === setSubsCourses.course_id)) {
-    setCourses(prev => [...prev, setSubsCourses]);
-  }
+//   const handleJoinClass = () => {
+//     setShowMeeting(true);
+//   };
 
-  // Optionally close modal, switch tabs, etc.
-};
+//   const handleMeetingEnd = () => {
+//     setShowMeeting(false);
+//   };
+    const handleAddCourse = () => {
+        if (!courses) return;
+
+        // Prevent duplicates (optional)
+        if (!courses.some(course => course.course_id === setSubsCourses.course_id)) {
+            setCourses(prev => [...prev, setSubsCourses]);
+        }
+
+        // Optionally close modal, switch tabs, etc.
+    };
 
 
 
@@ -63,9 +91,9 @@ const handleAddCourse = () => {
             try {
                 const coursesResponse = await GetCourses();
                 setCourses(coursesResponse.data.data.boardClassCourses);
-                 console.log(coursesResponse.data.data.boardClassCourses)
+                console.log('allcourse availabel subs' ,coursesResponse.data.data.boardClassCourses)
                 const anotherResponse = await SubscribeCourses();
-                setSubsCourses(anotherResponse.data.data.student_courses);
+                setSubsCourses("SubscribeCourses", anotherResponse.data.data.student_courses);
                 console.log(anotherResponse.data)
                 setLoading(false);
             }
@@ -88,6 +116,58 @@ const handleAddCourse = () => {
     },
         []);
 
+const handleJoinMeeting = async (course) => {
+    setLoading(true);
+    setActiveCourseId(course.course_id); 
+    try {
+    console.log({
+  course_parent1: course.course_parent1,
+  course_parent2: course.course_parent2,
+  course_name: course.course_name,
+});
+
+        const res = await axios.post('http://localhost:3000/api/match-meeting-by-course', {
+      course_parent1: course.course_parent1,
+      course_parent2: course.course_parent2,
+      course_name: course.course_name
+    });
+console.log("res  match", res);
+const meetingId = res.data.meetingId;
+console.log("meetingId", meetingId)
+    // const { meetingId } = res.data;
+
+console.log("course_parent1", res.data)
+   
+
+// Join participant
+    const joinRes = await axios.post('http://localhost:3000/api/join-meeting', {
+      meetingId,
+      name: 'Student'
+    });
+
+    // const { token } = joinRes.data;
+    
+      const token = joinRes.data.token;
+      setToken(token);
+ const meetingInstance = await initDyteClient({
+        authToken: token,
+        meetingId,
+        defaults: {
+          audio: true,
+          video: true
+        }
+      });
+
+      setMeeting(meetingInstance);
+// console.log(joinRes)
+
+    } catch (error) {
+      console.error('Error joining meeting:', error);
+      alert('Failed to join meeting!');
+    } finally {
+      setLoading(false);
+    }
+  };
 
     return (
 
@@ -95,6 +175,8 @@ const handleAddCourse = () => {
 
         <div className="dashboard-body">
             <h2>Student Courses</h2>
+            <ClassMeeting />
+            {/* <SubscribedCourses/> */}
             {/* {Array.isArray(courses) && courses.length > 0 ? (
   <ul>
     {courses.map(course => (
@@ -240,22 +322,46 @@ const handleAddCourse = () => {
                                                                 <span className="text-13 fw-bold text-gray-600">4.9</span>
                                                                 <span className="text-13 fw-bold text-gray-600">(12k)</span>
                                                             </div> */}
-                                                                        <button type="button" className="btn btn-outline-main rounded-pill py-9" data-bs-toggle="modal"
-                                                                            data-bs-target="#exampleModal"
-                                                                            value={course.course_id}   onClick={handleAddCourse}>
+                                                                        <button type="button" className="btn btn-outline-main rounded-pill py-9" 
+                                                                        
+                                                                            value={course.course_id} onClick={handleAddCourse}>
                                                                             Add Course
                                                                         </button>
+                                                                        {/* <Link  
+                                                                            to={`/class${course.course_parent1.replace("Class ", "")}/${course.course_parent2.toLowerCase()}/${course.course_name.toLowerCase()}`}
+                                                                            className="btn btn-main rounded-pill py-9"
+                                                                        >
+                                                                            <i className="ph ph-video-camera" style={{ marginRight: "5px" }}></i>
+                                                                            Join Video Call
+                                                                        </Link> */}
+                                                                        {course.subscribed === 1 ? (
+             <button onClick={() => handleJoinMeeting(course)} disabled={loading} data-bs-toggle="modal"
+                                                                            data-bs-target="#exampleModal">
+        {loading && activeCourseId === course.course_id ? 'Joining...' : 'Join Meeting'}             
+      </button>
+                                                                        ):(<button disabled>Add Course</button>) }
+    
                                                                         {/* Modal */}
                                                                         <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                             <div className="modal-dialog">
                                                                                 <div className="modal-content">
                                                                                     <div className="modal-header">
                                                                                         <h2 className="mb-4 modal-title fs-5" id="exampleModalLabel">Subscription Plans</h2>
-                                                                                                   {/* <h2>{course.course_name}</h2> */}
+                                                                                        {/* <h2>{course.course_name}</h2> */}
                                                                                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                                     </div>
                                                                                     <div className="modal-body p-2">
-                                                                                        <PricingPage  value={course.course_id} CoursesNames={course}/>
+                                                                                        {/* <PricingPage value={course.course_id} CoursesNames={course} /> */}
+                                                                                         {/* Show Dyte UI below only for this course */}
+            {meeting && activeCourseId === course.course_id && (
+              <div style={{ height: '80vh', marginTop: '20px' }}>
+                <DyteProvider value={meeting}>
+                  <DyteUiProvider>
+                    <DyteMeeting mode="fill"  meeting={dyteClient} showSetupScreen />
+                  </DyteUiProvider>
+                </DyteProvider>
+              </div>
+            )}
                                                                                     </div>
                                                                                     <div className="modal-footer">
                                                                                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>

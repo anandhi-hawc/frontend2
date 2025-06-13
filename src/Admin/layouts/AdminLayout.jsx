@@ -16,6 +16,11 @@ import Setting from "../views/Setting";
 import PrivateRoute from '../../utils/PrivateRoute';
 // import DyteScreen from "../views/DyteScreen";
 import DyteMeetingRoom from "../views/DyteMeetingRoom";
+import ClassMeeting from '../components/ClassMeeting';
+import MultipleUser from "../components/MultipleUser.jsx";
+import DyteJoin from "../views/DyteJoin.jsx";
+import LiveMeetingList from "../views/LiveMeetingList.jsx";
+
 
 function AdminLayout() {
    const [collapsed, setCollapsed] = useState(false);
@@ -31,8 +36,18 @@ function AdminLayout() {
  <Routes>
             <Route path="dashboard"  element={<PrivateRoute><Dashboard /></PrivateRoute>} />
             <Route path="course" element={<PrivateRoute><Course /></PrivateRoute>} />
-             <Route path="meetingroom" element={<PrivateRoute><DyteMeetingRoom/></PrivateRoute>} /> 
+             <Route path="meetingroom" element={<PrivateRoute><DyteMeetingRoom/></PrivateRoute>} />
+   <Route path="dytejoin" element={<PrivateRoute><DyteJoin/></PrivateRoute>} />
+
+<Route path="livemeetingclass" element={<PrivateRoute><LiveMeetingList/></PrivateRoute>} />
+
+
+              <Route path="multipleuser" element={<PrivateRoute><MultipleUser/></PrivateRoute>} />  
           <Route path="setting" element={<PrivateRoute><Setting/></PrivateRoute>} /> 
+
+          {/* <Route path="/class:classId/:board/:subject" element={<ClassMeeting />} /> */}
+          <Route path="/class:course_parent1/:course_parent2/:course_name" element={<ClassMeeting />} />
+
             <Route path="*" element={<h1>404 Page Not Found</h1>} />
 
             {/* 
