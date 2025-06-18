@@ -218,3 +218,6 @@
 {
   background-color: #496ba7;
 }
+.backend_modal.modal-dialog {
+       max-width: -webkit-fill-available;
+}

@@ -20,6 +20,7 @@ import ClassMeeting from '../components/ClassMeeting';
 import MultipleUser from "../components/MultipleUser.jsx";
 import DyteJoin from "../views/DyteJoin.jsx";
 import LiveMeetingList from "../views/LiveMeetingList.jsx";
+import DoubtSession from "../views/DoubtSession.jsx";
 
 
 function AdminLayout() {
@@ -38,6 +39,8 @@ function AdminLayout() {
             <Route path="course" element={<PrivateRoute><Course /></PrivateRoute>} />
              <Route path="meetingroom" element={<PrivateRoute><DyteMeetingRoom/></PrivateRoute>} />
    <Route path="dytejoin" element={<PrivateRoute><DyteJoin/></PrivateRoute>} />
+      <Route path="doubtsession" element={<PrivateRoute><DoubtSession/></PrivateRoute>} />
+
 
 <Route path="livemeetingclass" element={<PrivateRoute><LiveMeetingList/></PrivateRoute>} />
 
