@@ -14,7 +14,6 @@ import PricingPage from "../components/PricingPage";
 import SubscribedCourses from "./SubscribedCourses";
 // import ClassMeeting from "../components/ClassMeeting";
 import ClassMeeting from "../components/ClassMeeting";
-import { useNavigate } from "react-router-dom";
 import {
     DyteMeeting,
     DyteUiProvider
@@ -23,7 +22,7 @@ import {
     useDyteClient,
     DyteProvider
 } from '@dytesdk/react-web-core';
-import DyteClass from "./DyteClass";
+import DoubtSession from "./DoubtSession";
 
 
 function Dashboard() {
@@ -121,14 +120,67 @@ function Dashboard() {
         []);
 
 
-        const navigate = useNavigate();
-    const handleJoinMeeting = async (course) => {
-   
-    
-         setLoading(true);
         
-           navigate("../dyteclass",  {state: {course} }  , { replace: true });
-       console.log("Navigating with course:", course);
+    const handleJoinMeeting = async (course) => {
+        setLoading(true);
+        setMeeting(null);
+        setActiveCourseId(null);
+
+        try {
+            console.log({
+                course_parent1: course.course_parent1,
+                course_parent2: course.course_parent2,
+                course_name: course.course_name,
+            });
+
+            const res = await axios.post('http://localhost:3000/api/match-meeting-by-course', {
+                course_parent1: course.course_parent1,
+                course_parent2: course.course_parent2,
+                course_name: course.course_name
+            });
+            console.log("res  match", res);
+            const meetingId = res.data.meetingId;
+            console.log("meetingId", meetingId)
+            // const { meetingId } = res.data;
+
+            console.log("course_parent1", res.data)
+
+
+            // Join participant
+            const joinRes = await axios.post('http://localhost:3000/api/join-meeting', {
+                meetingId,
+             name: null
+            });
+
+            // const { token } = joinRes.data;
+
+            const token = joinRes.data.token;
+            localStorage.setItem("token", token)
+             localStorage.setItem("originalmeetingId", meetingId)
+            setToken({token,meetingId});
+            console.log(token)
+            const meetingInstance = await initDyteClient({
+                authToken: token,
+                meetingId,
+                defaults: {
+                    audio: false,
+                    video: false
+                }
+            });
+
+            setMeeting(meetingInstance);
+            
+      // Save for rejoin later
+   setOriginalMeetingInfo({ token, meetingId });
+            // console.log(joinRes)
+            setActiveCourseId(course.course_id);
+
+        } catch (error) {
+            console.error('Error joining meeting:', error);
+            alert('Failed to join meeting!');
+        } finally {
+            setLoading(false);
+        }
     };
 
     useEffect(() => {
