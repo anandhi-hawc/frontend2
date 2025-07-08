@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function TimerPopup({ meeting }) {
+function TimerPopup({ onTrigger }) {
   const [minutes, setMinutes] = useState("");
   const [showInput, setShowInput] = useState(false);
 
@@ -13,26 +13,7 @@ function TimerPopup({ meeting }) {
     setShowInput(false);
 
     setTimeout(() => {
-    //   onTrigger(); // Trigger the popup after delay
-    //    meeting.participants.broadcastMessage({
-    //   type: "trigger_popup",
-    // //   role: "teacher", // optional
-    //   content: "Show doubt/quiz popup",
-    // });
-    //  if (meeting && meeting.participants?.broadcastMessage) {
-    //     meeting.participants.broadcastMessage({
-    //       type: "trigger_popup",
-    //       content: "Show Doubt/Quiz",
-    //     });
-    //     alert("Notification sent to all participants!");
-    //   } else {
-    //     console.error("Meeting or broadcastMessage not available");
-    //   }
-//     if (meeting && meeting.participants?.broadcastMessage) {
-//     meeting.participants.broadcastMessage("trigger_popup");
-//     alert("Notification sent to all participants!");
-//   }
-    //   alert("see notofication");
+      onTrigger(); // Trigger the popup after delay
     }, delay * 60 * 1000);
   };
 

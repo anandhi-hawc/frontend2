@@ -217,6 +217,7 @@ function Dashboard() {
                                     <div class="col-lg-6">
                                         <div class="grettings-box-two__content">
                                             <h2 class="fw-medium mb-0 flex-align gap-10">Hi, {user?.name}
+                                                <span className="text-warning">  {user?.role_name} </span>
                                                 <img src={waveHand} alt="" /> </h2>
                                             <h2 class="fw-medium mb-16">Effective, Engaging & Experienced Teaching</h2>
                                             <div class="event-container">

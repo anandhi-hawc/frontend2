@@ -69,9 +69,10 @@ export  const LoginApi =async (form)=>
 try{
   
    const response = await axios.post(LOGIN_URL,form);
-     storeUsageData(response);
-        console.log(response);
-     
+     storeUsageData(response);     
+        console.log("response" ,response);
+         console.log("response role_name" ,response.data.data.role_name);
+      return response;
 } catch(error) {
 throw error.response?.data || error;
 }

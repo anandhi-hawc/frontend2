@@ -50,10 +50,17 @@ export default function Login() {
          
           try {
   const response = await LoginApi(form);
+  // const { token, role_name } = response.data.data;
+  const userData = response.data.data;
+    const { token, name, role_name } = userData;
+    const role = role_name.toLowerCase();
+ localStorage.setItem("user", JSON.stringify({ token, name, role }));
   console.log(response)
-  navigate('/admin/dashboard'); 
+  navigate('admin/dashboard')
+
+  // navigate(`/online/${role}/dashboard`); 
   
-    } catch (err) {
+    // } catch (err) {
       console.error("Login failed:", err);
       alert("Invalid credentials or server error");
     } finally {
